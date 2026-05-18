@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Semana Comercial - Cámara de Comercio de Arauca</title>
+  <link rel="stylesheet" href="css/registro.css">
+</head>
+<body>
+
+<!-- Modal política de datos -->
+<div class="modal-overlay" id="modal-politica">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>Política de Tratamiento de Datos Personales</h3>
+      <button class="modal-cerrar" onclick="cerrarModal()">&#x2715;</button>
+    </div>
+    <div class="modal-body">
+      <p>De acuerdo con la Ley Estatutaria 1581 de 2012 de Protección de Datos y normas concordantes, autorizo como Titular de los datos recogidos en este formulario para que éstos sean incorporados en una base de datos responsabilidad de la <strong>Cámara de Comercio Arauca</strong> para que sean tratados con la finalidad de: Realizar gestión administrativa, fidelización de clientes, gestión de estadísticas internas, marketing, encuestas de opinión, prospección comercial, publicidad propia, proyectos de formación empresarial, estudios económicos, segmentación de mercados y remisión de información sobre capacitaciones y eventos.</p>
+      <p>No es obligatorio suministrar información que trate de Datos Sensibles, entendidos como aquellos que afectan la intimidad o generen algún tipo de discriminación, o sobre menores de edad.</p>
+      <p>El titular de los datos podrá ejercitar los derechos de acceso, corrección, supresión, revocación o reclamo por infracción sobre mis datos, mediante un escrito dirigido a Cámara de Comercio Arauca a la dirección de correo electrónico <a href="mailto:protecciondatospersonales@ccarauca.org.co">protecciondatospersonales@ccarauca.org.co</a> indicando en el asunto el derecho que desea ejercitar, o mediante correo ordinario remitido a la <strong>Carrera 25 Nº 18 A – 49 Barrio La Esperanza, Teléfono: 8853356 ext. 107, Arauca, Colombia.</strong></p>
+      <p>La Política de Tratamiento a la que se encuentran sujetos los datos personales se podrá consultar en la página web <a href="https://www.ccarauca.org.co" target="_blank">www.ccarauca.org.co</a> o acceder a través del siguiente correo electrónico: <a href="mailto:protecciondatospersonales@ccarauca.org.co">protecciondatospersonales@ccarauca.org.co</a></p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cerrar-footer" onclick="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Formulario -->
+<div class="card" id="card-formulario">
+  <div class="logo">
+    <img src="assets/logo.png" style="height:50px;margin-bottom:12px"><br>
+    <h2>Semana Comercial</h2>
+    <span class="empresa-nombre" id="empresa-label">Cargando...</span>
+  </div>
+
+  <div id="formulario" style="display:none">
+    <div class="campo">
+      <label for="nombre">Nombre completo <span>*</span></label>
+      <input type="text" id="nombre" autocomplete="name" placeholder="Tu nombre completo">
+      <div class="msg-error" id="err-nombre">Ingresa tu nombre</div>
+    </div>
+
+    <div class="campo">
+      <label for="cedula">Número de identificación <span>*</span></label>
+      <input type="number" id="cedula" inputmode="numeric" autocomplete="off" placeholder="Ej: 1000123456" min="1000000" max="9999999999">
+      <div class="msg-error" id="err-cedula">Ingresa un número de identificación válido (6 a 10 dígitos)</div>
+    </div>
+
+    <div class="campo">
+      <label for="telefono">Teléfono <span>*</span></label>
+      <input type="tel" id="telefono" inputmode="numeric" autocomplete="tel" placeholder="3XXXXXXXXX" maxlength="12">
+      <div class="msg-error" id="err-telefono">Ingresa un número de 10 dígitos</div>
+    </div>
+
+    <div class="campo">
+      <label for="email">Email</label>
+      <input type="email" id="email" autocomplete="email" placeholder="correo@ejemplo.com">
+      <div class="msg-error" id="err-email">Ingresa un email válido</div>
+    </div>
+
+    <div class="campo">
+      <label for="direccion">Dirección <span>*</span></label>
+      <input type="text" id="direccion" autocomplete="street-address" placeholder="">
+      <div class="msg-error" id="err-direccion">Ingresa tu dirección</div>
+    </div>
+
+    <!-- Autorización -->
+    <div class="autorizacion-bloque">
+      <p><strong>Tratamiento de datos personales <span style="color:#e11d48">*</span></strong><br>
+      ¿Autoriza el tratamiento de sus datos personales por parte de la Cámara de Comercio de Arauca?</p>
+      <button type="button" class="btn-ver-politica" onclick="abrirModal()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+        </svg>
+        Ver política de datos
+      </button>
+      <div class="opciones-autorizacion">
+        <label class="opcion-auth autoriza" id="opcion-si" onclick="seleccionarAuth('si')">
+          <input type="radio" name="autorizacion" value="si">
+          <span class="check-icon">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          Autorizo
+        </label>
+        <label class="opcion-auth no-autoriza" id="opcion-no" onclick="seleccionarAuth('no')">
+          <input type="radio" name="autorizacion" value="no">
+          <span class="check-icon">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </span>
+          No autorizo
+        </label>
+      </div>
+      <div class="msg-error-auth" id="err-autorizacion">Debes seleccionar una opción para continuar</div>
+    </div>
+
+    <button id="btn" onclick="registrar()">Registrar</button>
+  </div>
+
+  <div class="resultado" id="resultado"></div>
+</div>
+
+<script type="module" src="js/registro.js"></script>
+</body>
+</html>

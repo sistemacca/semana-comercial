@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel Admin - Semana Comercial Arauca</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="preload" as="image" href="assets/fondo_login.jpg">
+</head>
+<body>
+
+<!-- ══ LOGIN ══════════════════════════════════════════════════ -->
+<div id="login">
+  <div style="position:absolute;inset:0;background:rgba(0,0,0,0.45);z-index:0"></div>
+  <div class="login-logo" style="position:relative;z-index:1">
+    <img src="assets/logo.png" style="height:80px;margin-bottom:8px;filter:brightness(0) invert(1)" alt="Logo">
+  </div>
+  <div class="login-card" style="position:relative;z-index:1">
+    <h2>Bienvenido</h2>
+    <p>Semana Comercial 2026</p>
+    <label class="login-label" for="clave-email">Correo electrónico</label>
+    <input class="login-input" type="email" id="clave-email" placeholder="admin@ejemplo.com" autocomplete="email"
+           onkeydown="if(event.key==='Enter') document.getElementById('clave-pass').focus()">
+    <label class="login-label" for="clave-pass">Contraseña</label>
+    <input class="login-input" type="password" id="clave-pass" placeholder="••••••••" autocomplete="current-password"
+           onkeydown="if(event.key==='Enter') entrar()">
+    <button class="login-btn" id="btn-login" onclick="entrar()">Ingresar al Panel</button>
+    <div class="login-error" id="err-login"></div>
+  </div>
+  <p class="login-footer" style="position:relative;z-index:1">Acceso exclusivo para personal autorizado</p>
+</div>
+
+<!-- ══ APP ════════════════════════════════════════════════════ -->
+<div id="app">
+
+  <!-- Topbar móvil -->
+  <div class="topbar-movil">
+    <button class="btn-menu" onclick="toggleSidebar()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:22px;height:22px">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <div style="text-align:center">
+      <div class="titulo">Semana Comercial</div>
+      <div class="subtitulo" id="panel-titulo-movil">Dashboard</div>
+    </div>
+    <div id="badge-offline" style="display:none;background:#dc2626;color:white;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px">Sin red</div>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <h2>Semana Comercial</h2>
+        <p>Cámara de Comercio de Arauca</p>
+      </div>
+      <nav class="sidebar-menu">
+        <div class="menu-item activo" onclick="irA('dashboard','Dashboard')">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></span>
+          Dashboard
+        </div>
+        <div class="menu-item" onclick="irA('registros','Registros')">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg></span>
+          Registros
+        </div>
+        <div class="menu-item" onclick="irA('empresas','Empresas')">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 7l9-4 9 4M4 7v14M20 7v14M9 21V12h6v9"/></svg></span>
+          Empresas
+        </div>
+        <div class="menu-item" onclick="irA('enlaces','Enlaces')">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></span>
+          Enlaces
+        </div>
+      </nav>
+      <div style="padding:12px 22px;border-top:1px solid rgba(255,255,255,0.1)">
+        <div id="lbl-usuario" style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:8px;text-align:center;word-break:break-all;padding:0 4px"></div>
+        <button onclick="cerrarSesion()" style="width:100%;padding:10px;background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.2);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">
+          Cerrar sesión
+        </button>
+      </div>
+      <div class="sidebar-foot">v3.1 · Firebase + GitHub Pages</div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+      <!-- ══ DASHBOARD ══ -->
+      <div class="panel activo" id="panel-dashboard">
+        <div class="page-top">
+          <div><h1>Dashboard</h1><p>Actualización en tiempo real · onSnapshot activo</p></div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <span class="refresh-badge"><span class="refresh-dot"></span>En línea</span>
+            <button class="btn btn-p btn-sm" onclick="cargarDashboard()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+              Actualizar
+            </button>
+            <button class="btn btn-gray btn-sm" id="btn-recalcular" onclick="recalcularStats()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              Recalcular datos
+            </button>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="stat-val" id="s-emp">-</div><div class="stat-lbl">Empresas registradas</div></div>
+          <div class="stat"><div class="stat-val" id="s-vendidas">-</div><div class="stat-lbl">Boletas vendidas por la Cámara</div></div>
+          <div class="stat"><div class="stat-val" id="s-bol">-</div><div class="stat-lbl">Boletas entregadas por el comercio</div></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Progreso por empresa</h3></div>
+          <div class="spin-wrap" id="spin-dash"><div class="spin"></div><p>Cargando...</p></div>
+          <div class="tabla-scroll">
+            <table id="t-dash" style="display:none">
+              <thead><tr><th>#</th><th>Razón Social</th><th>Entregadas<br>por el comercio</th><th>Total compradas</th><th>Disponibles</th><th>Progreso</th></tr></thead>
+              <tbody id="tb-dash"></tbody>
+            </table>
+          </div>
+          <div class="lista-m" id="lm-dash"></div>
+          <div class="vacio" id="vacio-dash" style="display:none">Sin empresas registradas</div>
+          <div id="pag-dash" style="display:none"></div>
+        </div>
+      </div>
+
+      <!-- ══ REGISTROS ══ -->
+      <div class="panel" id="panel-registros">
+        <div class="page-top">
+          <div><h1>Registros</h1><p>Todos los usuarios registrados</p></div>
+          <div class="export-bar">
+            <div class="date-group">
+              <label for="exp-desde">Desde</label>
+              <input type="date" id="exp-desde">
+            </div>
+            <div class="date-group">
+              <label for="exp-hasta">Hasta</label>
+              <input type="date" id="exp-hasta">
+            </div>
+            <button class="btn btn-g" id="btn-exportar" onclick="exportarCSV()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Exportar CSV
+            </button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="controles">
+            <input type="text" id="buscar" placeholder="Buscar nombre, teléfono, identificación o email..." oninput="filtrar()">
+            <select id="fil-emp" onchange="filtrar()"><option value="">Todas las empresas</option></select>
+            <button class="btn btn-p btn-sm" onclick="cargarRegistros()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+            </button>
+          </div>
+          <div id="nav-bloques" style="display:none;align-items:center;gap:10px;padding:10px 20px;border-bottom:1px solid var(--borde);background:#fafcfb;flex-wrap:wrap">
+            <button class="btn btn-gray btn-sm" id="btn-bloque-ant" onclick="cargarBloque(regBloqueActual-1)" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><polyline points="15 18 9 12 15 6"/></svg>
+              Anterior
+            </button>
+            <span id="lbl-bloque" style="font-size:12px;color:var(--sub)">Bloque 1</span>
+            <button class="btn btn-gray btn-sm" id="btn-bloque-sig" onclick="cargarBloque(regBloqueActual+1)" disabled>
+              Siguiente
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+            <span style="font-size:11px;color:#94a3b8;margin-left:4px">Mostrando hasta 200 registros por bloque</span>
+          </div>
+          <div class="spin-wrap" id="spin-reg"><div class="spin"></div><p>Cargando...</p></div>
+          <div class="tabla-box" id="tabla-box-reg">
+            <table id="t-reg" style="display:none">
+              <thead>
+                <tr><th>#</th><th>Boleta</th><th>Código Empresa</th><th>Razón Social</th><th>Nombre</th><th>Identificación</th><th>Teléfono</th><th>Email</th><th>Dirección</th><th>Fecha</th><th>Autorización datos</th></tr>
+              </thead>
+              <tbody id="tb-reg"></tbody>
+            </table>
+          </div>
+          <div class="lista-m" id="lm-reg"></div>
+          <div class="vacio" id="vacio-reg" style="display:none">No hay registros</div>
+          <div id="pag-reg" style="display:none"></div>
+        </div>
+      </div>
+
+      <!-- ══ EMPRESAS ══ -->
+      <div class="panel" id="panel-empresas">
+        <div class="page-top"><div><h1>Empresas</h1><p>Gestiona empresas y rangos de boletas</p></div></div>
+        <div class="form-card">
+          <div class="form-card-toggle" id="toggle-nueva-empresa" onclick="toggleFormEmpresa()">
+            <h3>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+              Crear nueva empresa
+            </h3>
+            <span class="toggle-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </span>
+          </div>
+          <div class="form-card-body" id="body-nueva-empresa">
+            <div class="f2">
+              <div class="fg"><label>Identificación / NIT <span style="color:#e11d48">*</span></label><input type="text" id="e-nit" inputmode="numeric" placeholder=""></div>
+              <div class="fg"><label>Razón social <span style="color:#e11d48">*</span></label><input type="text" id="e-nombre" placeholder=""></div>
+            </div>
+            <div class="fg" style="margin-top:-6px"><div class="hint">Se asignará un <strong>código único de enlace</strong> automáticamente</div></div>
+            <div class="f2">
+              <div class="fg"><label>Boleta desde</label><input type="number" id="e-desde" placeholder="1"></div>
+              <div class="fg"><label>Boleta hasta</label><input type="number" id="e-hasta" placeholder="50"></div>
+            </div>
+            <button class="btn btn-p btn-full" onclick="crearEmpresa()">Crear empresa</button>
+            <div class="fmsg" id="msg-emp"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Empresas registradas</h3>
+            <button class="btn btn-p btn-sm" onclick="cargarEmpresas()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+              Actualizar
+            </button>
+          </div>
+          <div class="controles">
+            <input type="text" id="buscar-emp" placeholder="Buscar por NIT o razón social..." oninput="filtrarEmpresas()">
+          </div>
+          <div class="spin-wrap" id="spin-emp"><div class="spin"></div><p>Cargando...</p></div>
+          <div class="tabla-box" id="tabla-box-emp">
+            <table id="t-emp" style="display:none">
+              <thead>
+                <tr><th>#</th><th>Código Enlace</th><th>NIT</th><th>Razón Social</th><th>Desde</th><th>Hasta</th><th>Total<br>compradas</th><th>Entregadas<br>por el comercio</th><th>Disponibles</th><th>Progreso</th><th>Acción</th></tr>
+              </thead>
+              <tbody id="tb-emp"></tbody>
+            </table>
+          </div>
+          <div class="lista-m" id="lm-emp"></div>
+          <div class="vacio" id="vacio-emp" style="display:none">No hay empresas creadas</div>
+          <div id="pag-emp" style="display:none"></div>
+        </div>
+      </div>
+
+      <!-- ══ ENLACES ══ -->
+      <div class="panel" id="panel-enlaces">
+        <div class="page-top">
+          <div><h1>Enlaces</h1><p>Enlace de registro para cada empresa</p></div>
+          <button class="btn btn-g" onclick="copiarTodos()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copiar todos
+          </button>
+        </div>
+        <div class="card">
+          <div class="controles">
+            <input type="text" id="buscar-enlace" placeholder="Buscar empresa..." oninput="filtrarEnlaces()">
+            <button class="btn btn-p btn-sm" onclick="cargarEnlaces()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+            </button>
+          </div>
+          <div class="spin-wrap" id="spin-enl"><div class="spin"></div><p>Cargando...</p></div>
+          <div class="tabla-box" id="tabla-box-enl">
+            <table id="t-enl" style="display:none">
+              <thead><tr><th>#</th><th>Razón Social</th><th>Código Enlace</th><th>Rango</th><th>Enlace de registro</th><th>Acción</th></tr></thead>
+              <tbody id="tb-enl"></tbody>
+            </table>
+          </div>
+          <div class="lista-m" id="lm-enl"></div>
+          <div class="vacio" id="vacio-enl" style="display:none">No hay empresas</div>
+          <div id="pag-enl" style="display:none"></div>
+        </div>
+      </div>
+
+    </div><!-- /main -->
+  </div><!-- /layout -->
+</div><!-- /app -->
+
+<!-- ══ MODAL EDITAR EMPRESA ══ -->
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h3>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;display:inline-block;vertical-align:middle;margin-right:4px">
+        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+        <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+      </svg>
+      Editar empresa
+    </h3>
+    <p class="modal-id" id="modal-id">—</p>
+    <input type="hidden" id="m-id">
+    <div class="f2">
+      <div class="fg"><label>Identificación / NIT</label><input type="text" id="m-nit" inputmode="numeric"></div>
+      <div class="fg"><label>Razón social</label><input type="text" id="m-nombre"></div>
+    </div>
+    <div class="f2">
+      <div class="fg"><label>Boleta desde</label><input type="number" id="m-desde"></div>
+      <div class="fg"><label>Boleta hasta</label><input type="number" id="m-hasta"></div>
+    </div>
+    <div class="sep"></div>
+    <div class="fg">
+      <label>Boletas entregadas (contador actual)</label>
+      <input type="number" id="m-contador" min="0">
+      <div class="hint">Escribe 0 para resetear el contador a cero</div>
+    </div>
+    <div class="fmsg" id="msg-modal"></div>
+    <div class="modal-btns">
+      <button class="btn btn-gray btn-full" onclick="cerrarModal()">Cancelar</button>
+      <button class="btn btn-p btn-full" onclick="guardarEmpresa()">Guardar cambios</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/admin.js"></script>
+</body>
+</html>

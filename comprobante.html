@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Comprobante - Semana Comercial</title>
+  <link rel="stylesheet" href="css/comprobante.css">
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <img src="assets/logo.png" alt="Logo Cámara de Comercio">
+    <div class="subtitulo">Semana Comercial 2026</div>
+  </div>
+
+  <!-- Estado: cargando -->
+  <div id="estado-cargando">
+    <div class="spin"></div>
+    <p>Verificando registro...</p>
+  </div>
+
+  <!-- Estado: error -->
+  <div id="estado-error" class="body">
+    <div class="error-icon-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+      </svg>
+    </div>
+    <div class="error-titulo">Comprobante no válido</div>
+    <div class="error-msg" id="error-detalle">Este enlace no corresponde a un registro real en el sistema.</div>
+  </div>
+
+  <!-- Estado: exitoso -->
+  <div id="estado-ok">
+    <div class="body">
+      <div class="check-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <div class="badge-success">Registro exitoso</div>
+      <div class="empresa" id="empresa"></div>
+      <div class="nombre-usuario" id="nombre"></div>
+
+      <div class="boleta-box">
+        <div class="boleta-label">Tu número de boleta</div>
+        <div class="numero" id="boleta"></div>
+      </div>
+
+      <button class="btn" id="btn-descargar" onclick="descargarJPG()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Descargar comprobante
+      </button>
+
+      <div class="captura-box">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+            <line x1="12" y1="18" x2="12.01" y2="18"/>
+          </svg>
+        </div>
+        <div class="cap-texto">
+          <span class="cap-titulo">Toma una captura de pantalla</span>
+          <span class="cap-sub">Guarda este número como comprobante</span>
+        </div>
+      </div>
+
+      <div class="footer-text">Este comprobante es tu única prueba de participación</div>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/comprobante.js"></script>
+</body>
+</html>

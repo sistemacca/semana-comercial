@@ -1,0 +1,144 @@
+/* ─────────────────────────────────────────────────────────────
+   comprobante.css  ·  Página de comprobante de registro
+───────────────────────────────────────────────────────────── */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-image: url('../assets/fondo_login.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 0;
+}
+
+/* ── Card ── */
+.card {
+  position: relative;
+  z-index: 1;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+  border-top: 6px solid #007d42;
+  overflow: hidden;
+  text-align: center;
+  width: 100%;
+  max-width: 420px;
+}
+
+.header { background: #007d42; padding: 24px 20px 20px; }
+.header img { height: 52px; filter: brightness(0) invert(1); margin-bottom: 10px; }
+.header .subtitulo { color: rgba(255,255,255,0.8); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+
+.body { padding: 28px 24px; }
+
+/* ── Ícono de éxito ── */
+.check-icon {
+  width: 52px; height: 52px;
+  background: #dcfce7;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+}
+.check-icon svg { width: 26px; height: 26px; stroke: #16a34a; }
+
+.badge-success { font-size: 13px; font-weight: 600; color: #16a34a; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+.empresa       { font-size: 15px; font-weight: 700; color: #007d42; margin-bottom: 4px; }
+.nombre-usuario { font-size: 16px; font-weight: 600; color: #1e293b; margin-bottom: 20px; }
+
+/* ── Boleta ── */
+.boleta-box {
+  background: #f0f4f8;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 2px dashed #007d42;
+}
+.boleta-label { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.numero { font-size: 64px; font-weight: 700; color: #007d42; line-height: 1; }
+
+/* ── Botón descarga ── */
+.btn {
+  width: 100%; padding: 14px;
+  background: #007d42; color: white;
+  border: none; border-radius: 12px;
+  font-size: 15px; font-weight: 700;
+  cursor: pointer; margin-bottom: 12px;
+  display: flex; align-items: center;
+  justify-content: center; gap: 8px;
+  transition: background 0.2s;
+}
+.btn:hover { background: #005a30; }
+.btn svg { width: 18px; height: 18px; stroke: white; flex-shrink: 0; }
+
+/* ── Caja captura ── */
+.captura-box {
+  background: #f0fdf4;
+  border-radius: 10px;
+  padding: 12px 14px;
+  border: 1px solid #bbf7d0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+.captura-box .icon-wrap {
+  width: 36px; height: 36px;
+  background: #dcfce7;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.captura-box .icon-wrap svg { width: 18px; height: 18px; stroke: #16a34a; }
+.cap-titulo { font-size: 12px; font-weight: 600; color: #166534; }
+.cap-sub    { font-size: 11px; color: #4b7a5e; margin-top: 2px; }
+
+.footer-text { font-size: 11px; color: #94a3b8; margin-top: 20px; }
+
+/* ── Estados cargando / error ── */
+#estado-cargando { display: flex; flex-direction: column; align-items: center; padding: 48px 24px; gap: 16px; }
+.spin {
+  width: 36px; height: 36px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #007d42;
+  border-radius: 50%;
+  animation: giro 0.7s linear infinite;
+}
+@keyframes giro { to { transform: rotate(360deg); } }
+#estado-cargando p { font-size: 14px; color: #64748b; }
+
+#estado-error { display: none; padding: 36px 24px; }
+.error-icon-wrap {
+  width: 56px; height: 56px;
+  background: #fee2e2;
+  border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+}
+.error-icon-wrap svg { width: 28px; height: 28px; stroke: #dc2626; }
+.error-titulo { font-size: 18px; font-weight: 700; color: #dc2626; margin-bottom: 8px; }
+.error-msg    { font-size: 13px; color: #64748b; line-height: 1.6; }
+
+#estado-ok { display: none; }
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .body   { padding: 20px 16px; }
+  .numero { font-size: 52px; }
+  .btn    { padding: 15px; font-size: 16px; }
+}

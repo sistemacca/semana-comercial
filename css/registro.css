@@ -1,0 +1,269 @@
+/* ─────────────────────────────────────────────────────────────
+   registro.css  ·  Formulario público de registro
+───────────────────────────────────────────────────────────── */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; }
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f0f4f8;
+  background-image: url('../assets/fondo_login.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 32px 12px;
+  overflow-y: auto;
+}
+
+/* ── Card principal ── */
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 28px 20px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  border-top: 6px solid #007d42;
+}
+
+.logo { text-align: center; margin-bottom: 24px; }
+.logo h2 { color: #007d42; font-size: 22px; margin-bottom: 4px; }
+.logo .empresa-nombre {
+  display: inline-block;
+  margin-top: 8px;
+  background: #e6f4ec;
+  color: #007d42;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+/* ── Campos ── */
+.campo { margin-bottom: 14px; }
+
+label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #007d42;
+  margin-bottom: 5px;
+}
+label span { color: #e11d48; }
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="number"] {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  border-color: #007d42;
+  box-shadow: 0 0 0 3px rgba(0,125,66,0.08);
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="number"] { -moz-appearance: textfield; }
+
+input.error { border-color: #e11d48; }
+.msg-error {
+  font-size: 11px;
+  color: #e11d48;
+  margin-top: 4px;
+  display: none;
+}
+
+/* ── Autorización ── */
+.autorizacion-bloque {
+  background: #f8fafb;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+.autorizacion-bloque p {
+  font-size: 12px;
+  color: #475569;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.btn-ver-politica {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: 1px solid #007d42;
+  color: #007d42;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 11px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 12px;
+  width: auto;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-ver-politica:hover { background: #007d42; color: white; }
+
+.opciones-autorizacion { display: flex; gap: 10px; }
+.opcion-auth {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 9px 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+}
+.opcion-auth input[type="radio"] { display: none; }
+.opcion-auth.autoriza.selected    { border-color: #007d42; background: #e6f4ec; color: #007d42; }
+.opcion-auth.no-autoriza.selected { border-color: #e11d48; background: #fef2f2; color: #991b1b; }
+
+.opcion-auth .check-icon {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid #cbd5e1;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.2s, background 0.2s;
+}
+.opcion-auth.autoriza.selected .check-icon    { border-color: #007d42; background: #007d42; }
+.opcion-auth.no-autoriza.selected .check-icon { border-color: #e11d48; background: #e11d48; }
+.check-icon svg { display: none; }
+.opcion-auth.selected .check-icon svg { display: block; }
+
+.msg-error-auth { font-size: 11px; color: #e11d48; margin-top: 8px; display: none; }
+
+/* ── Modal política ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.activo { display: flex; }
+.modal-box {
+  background: white;
+  border-radius: 14px;
+  max-width: 520px;
+  width: 100%;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.modal-header {
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.modal-header h3 { font-size: 15px; color: #007d42; font-weight: 700; }
+.modal-cerrar {
+  background: none; border: none; cursor: pointer;
+  color: #94a3b8; line-height: 1; width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 6px; transition: background 0.15s, color 0.15s;
+  font-size: 22px;
+}
+.modal-cerrar:hover { background: #f1f5f9; color: #475569; }
+.modal-body {
+  padding: 18px 20px;
+  overflow-y: auto;
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.65;
+}
+.modal-body p { margin-bottom: 12px; }
+.modal-body a { color: #007d42; }
+.modal-footer {
+  padding: 14px 20px;
+  border-top: 1px solid #e2e8f0;
+  text-align: right;
+  flex-shrink: 0;
+}
+.btn-cerrar-footer {
+  background: #007d42; color: white; border: none;
+  border-radius: 8px; padding: 9px 22px;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-cerrar-footer:hover { background: #005a30; }
+
+/* ── Botón registrar ── */
+button#btn {
+  width: 100%; padding: 13px;
+  background: #007d42; color: white;
+  border: none; border-radius: 8px;
+  font-size: 15px; font-weight: 600;
+  cursor: pointer; margin-top: 8px;
+  transition: background 0.2s;
+}
+button#btn:hover:not(:disabled) { background: #005a30; }
+button#btn:disabled { background: #94a3b8; cursor: not-allowed; }
+
+.resultado { margin-top: 20px; text-align: center; }
+.fallo {
+  background: #fef2f2; border: 1px solid #fecaca;
+  border-radius: 8px; padding: 12px;
+  color: #991b1b; font-size: 14px;
+}
+
+.spinner {
+  display: inline-block;
+  width: 16px; height: 16px;
+  border: 2px solid #ffffff55;
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 0; background-attachment: scroll; }
+  .card { max-width: 100%; border-radius: 0; box-shadow: none; padding: 28px 20px; }
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="number"] { font-size: 16px; }
+  button#btn { font-size: 16px; padding: 15px; }
+}
+@media (max-width: 480px) {
+  .card { padding: 24px 16px; }
+  .logo h2 { font-size: 19px; }
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  input[type="number"] { font-size: 16px; padding: 13px; }
+  button#btn { font-size: 16px; padding: 15px; }
+  .modal-overlay { padding: 12px; }
+}
