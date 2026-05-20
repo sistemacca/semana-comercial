@@ -12,7 +12,6 @@
 </head>
 <body>
 
-<!-- ══ LOGIN ══════════════════════════════════════════════════ -->
 <div id="login">
   <div style="position:absolute;inset:0;background:rgba(0,0,0,0.45);z-index:0"></div>
   <div class="login-logo" style="position:relative;z-index:1">
@@ -33,10 +32,8 @@
   <p class="login-footer" style="position:relative;z-index:1">Acceso exclusivo para personal autorizado</p>
 </div>
 
-<!-- ══ APP ════════════════════════════════════════════════════ -->
 <div id="app">
 
-  <!-- Topbar móvil -->
   <div class="topbar-movil">
     <button class="btn-menu" onclick="toggleSidebar()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:22px;height:22px">
@@ -54,7 +51,6 @@
 
   <div class="layout">
 
-    <!-- SIDEBAR -->
     <div class="sidebar" id="sidebar">
       <div class="sidebar-logo">
         <h2>Semana Comercial</h2>
@@ -77,6 +73,10 @@
           <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></span>
           Enlaces
         </div>
+        <div class="menu-item" onclick="window.open('https://sistemacca.github.io/generador-QR/', '_blank')">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6"/><rect x="15" y="3" width="6" height="6"/><rect x="3" y="15" width="6" height="6"/><path d="M15 15h2v2h-2zM19 19h2v2h-2zM15 19h2v2h-2zM19 15h2v2h-2z"/></svg></span>
+          Generar QR
+        </div>
       </nav>
       <div style="padding:12px 22px;border-top:1px solid rgba(255,255,255,0.1)">
         <div id="lbl-usuario" style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:8px;text-align:center;word-break:break-all;padding:0 4px"></div>
@@ -87,10 +87,8 @@
       <div class="sidebar-foot">v3.1 · Firebase + GitHub Pages</div>
     </div>
 
-    <!-- MAIN -->
     <div class="main">
 
-      <!-- ══ DASHBOARD ══ -->
       <div class="panel activo" id="panel-dashboard">
         <div class="page-top">
           <div><h1>Dashboard</h1><p>Actualización en tiempo real · onSnapshot activo</p></div>
@@ -126,7 +124,6 @@
         </div>
       </div>
 
-      <!-- ══ REGISTROS ══ -->
       <div class="panel" id="panel-registros">
         <div class="page-top">
           <div><h1>Registros</h1><p>Todos los usuarios registrados</p></div>
@@ -180,7 +177,6 @@
         </div>
       </div>
 
-      <!-- ══ EMPRESAS ══ -->
       <div class="panel" id="panel-empresas">
         <div class="page-top"><div><h1>Empresas</h1><p>Gestiona empresas y rangos de boletas</p></div></div>
         <div class="form-card">
@@ -233,7 +229,6 @@
         </div>
       </div>
 
-      <!-- ══ ENLACES ══ -->
       <div class="panel" id="panel-enlaces">
         <div class="page-top">
           <div><h1>Enlaces</h1><p>Enlace de registro para cada empresa</p></div>
@@ -262,12 +257,7 @@
         </div>
       </div>
 
-    </div><!-- /main -->
-  </div><!-- /layout -->
-</div><!-- /app -->
-
-<!-- ══ MODAL EDITAR EMPRESA ══ -->
-<div class="modal-bg" id="modal">
+    </div></div></div><div class="modal-bg" id="modal">
   <div class="modal">
     <div class="modal-handle"></div>
     <h3>
